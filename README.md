@@ -10,12 +10,16 @@ ansible --version
 
 simple yml file for ansible 
 
-- name: Description
-  hosts: webservers
-  become: true
+- name: Setup Nginx on Web Server
+  hosts: web
+  become: yes
   tasks:
     - name: Install Nginx
       apt:
         name: nginx
         state: present
-
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
